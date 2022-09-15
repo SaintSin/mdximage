@@ -6,12 +6,67 @@ import socialImage from "../images/test.jpg";
 ---
 
 <Layout title="Welcome to Astro.">
-  <Image
-    src={socialImage}
-    width={1280}
-    aspectRatio="16:9"
-    alt="descriptive text"
-  />
+  <section class="hidden">
+    <Image
+      src={socialImage}
+      width={640}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+  </section>
+  <section class="hidden">
+    <Image
+      src={socialImage}
+      width={640}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+  </section>
+  <section class="hidden">
+    <Image
+      src={socialImage}
+      width={280}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+    <Image
+      src={socialImage}
+      width={280}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+    <Image
+      src={socialImage}
+      width={280}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+  </section>
+  <section class="hidden">
+    <h1>Massive Beach</h1>
+    <Image
+      src={socialImage}
+      width={640}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+  </section>
+  <section class="hidden">
+    <Image
+      src={socialImage}
+      width={640}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+  </section>
+  <section class="hidden">
+    <Image
+      src={socialImage}
+      width={640}
+      aspectRatio="16:9"
+      alt="descriptive text"
+    />
+  </section>
   Main Branch
   <main>
     <h1>Welcome to <span class="text-gradient">Astro</span></h1>
@@ -45,6 +100,24 @@ import socialImage from "../images/test.jpg";
 </Layout>
 
 <style>
+  section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    height: 100vh;
+    background-color: #4f39fa;
+  }
+  .hidden {
+    opacity: 0;
+    transition: all 1s;
+    filter: blur(15px);
+    transform: translateX(100%);
+  }
+  .show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0px);
+  }
   :root {
     --astro-gradient: linear-gradient(0deg, #4f39fa, #da62c4);
   }
@@ -103,3 +176,20 @@ import socialImage from "../images/test.jpg";
     padding: 0;
   }
 </style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  });
+  const hiddenElements = document.querySelectorAll(".hidden");
+
+  hiddenElements.forEach((el) => {
+    observer.observe(el);
+  });
+</script>
